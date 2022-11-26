@@ -1,0 +1,9 @@
+{
+  "hello": {
+    "prefix": "for",
+    "body": [
+      "for (int i{}; i < len; ++i){}"
+    ],
+    "description": "standard c++ for loop"
+  }
+}
