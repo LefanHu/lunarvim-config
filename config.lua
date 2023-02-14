@@ -96,7 +96,7 @@ lvim.builtin.which_key.mappings["R"] = { "<cmd>lua require'spectre'.open()<CR>",
 -- lvim.builtin.theme.options.style = "storm"
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- lvim.builtin.which_key.mappings["t"] = {
 --   name = "+Trouble",
 --   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -158,6 +158,7 @@ lvim.builtin.treesitter.highlight.enable = true
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
+-- require('lspconfig').ghdl_ls.setup{} -- vhdl lsp (not setup yet as it requires extra work)
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
@@ -178,7 +179,7 @@ lvim.builtin.treesitter.highlight.enable = true
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  -- { command = "black", filetypes = { "python" } },
+  { command = "black", filetypes = { "python" } },
   -- { command = "isort", filetypes = { "python" } },
   -- {
   --   -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
@@ -190,6 +191,7 @@ formatters.setup {
   --   filetypes = { "typescript", "typescriptreact" },
   -- },
   { command = "clang-format", filetypes = { "cpp" }, extra_args = { "--style", "Google" } },
+  { command = "prettier", filetypes = { "javascript", "typescript" } }
 }
 -- issue with 'multiple different client offset warning'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -230,6 +232,12 @@ lvim.plugins = {
     config = function()
       require("spectre").setup()
     end,
+  },
+  {
+    "lervag/vimtex",
+    -- config = function()
+    --   vim.g.vimtex_compiler_method = 'pdflatex'
+    -- end,
   }
 }
 
