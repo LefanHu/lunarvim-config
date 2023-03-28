@@ -5,5 +5,15 @@
       "for (int i{}; i < len; ++i){}"
     ],
     "description": "standard c++ for loop"
+  },
+  "leetcode": {
+    "prefix": "class",
+    "body": [
+      "class Solution{",
+      "public:",
+      " ",
+      "};"
+    ],
+    "description": "leetcode generic template"
   }
 }

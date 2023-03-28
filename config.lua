@@ -20,7 +20,6 @@ lvim.builtin.dap.on_config_done = function(dap)
       -- provide the absolute path for `codelldb` command if not using the one installed using `mason.nvim`
       command = "codelldb",
       args = { "--port", "${port}" },
-
       -- On windows you may have to uncomment this:
       -- detached = false,
     },
@@ -51,7 +50,7 @@ end
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
-lvim.colorscheme = "lunar"
+lvim.colorscheme = "tokyonight-day"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -179,7 +178,7 @@ lvim.builtin.treesitter.highlight.enable = true
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { command = "black", filetypes = { "python" } },
+  { command = "black",    filetypes = { "python" } },
   -- { command = "isort", filetypes = { "python" } },
   -- {
   --   -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
@@ -190,7 +189,11 @@ formatters.setup {
   --   ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
   --   filetypes = { "typescript", "typescriptreact" },
   -- },
-  { command = "clang-format", filetypes = { "cpp" }, extra_args = { "--style", "Google" } },
+  {
+    command = "clang-format",
+    filetypes = { "cpp" },
+    extra_args = { "--style", "Google" }
+  },
   { command = "prettier", filetypes = { "javascript", "typescript" } }
 }
 -- issue with 'multiple different client offset warning'
@@ -223,9 +226,14 @@ lvim.plugins = {
   --   "folke/trouble.nvim",
   --   cmd = "TroubleToggle",
   -- },
-  { "max397574/better-escape.nvim", config = function()
-    require("better_escape").setup()
-  end },
+  {
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup {
+        mapping = { "jk" }
+      }
+    end
+  },
   {
     "windwp/nvim-spectre",
     event = "BufRead",
@@ -238,7 +246,8 @@ lvim.plugins = {
     -- config = function()
     --   vim.g.vimtex_compiler_method = 'pdflatex'
     -- end,
-  }
+  },
+  -- {"rmagatti/auto-session" } -- doesn't seem to be configured properly
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -254,3 +263,8 @@ lvim.plugins = {
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+
+
+-- General settings
+-- vim.opt.smartindent = true;
+-- vim.opt.tabstop = 2;
